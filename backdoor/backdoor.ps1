@@ -1,7 +1,3 @@
-param (
-    [String]$dc
-)
-
 # Ensure the webhook URL is provided
 if (-not $dc) {
     Write-Error "Webhook URL was not provided"
