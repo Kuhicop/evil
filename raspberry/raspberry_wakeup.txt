@@ -1,0 +1,39 @@
+REM Abrir terminal
+DELAY 1000
+CTRL-ALT t
+REM Ejecutar AlertaLLuvia.py
+DELAY 1000
+STRING cd AlertaLluvia
+ENTER
+STRING python AlertaLluvia.py
+ENTER
+REM Abrir pestaña nueva en la terminal
+CTRL-SHIFT t
+DELAY 1000
+REM Subir de carpeta
+STRING cd ..
+ENTER
+REM Navegar a la carpeta discord-bot
+STRING cd discord-bot
+ENTER
+REM Ejecutar eye_tibiantis.py
+STRING python eye_tibiantis.py
+ENTER
+REM Abrir pestaña en terminal
+CTRL-SHIFT t
+DELAY 1000
+REM Ejecutar eye_darkrest.py
+STRING python eye_darkrest.py
+ENTER
+REM Abrir pestaña en terminal
+CTRL-SHIFT t
+DELAY 1000
+REM Ejecutar subastas.py
+STRING python subastas.py
+ENTER
+REM Abrir pestaña en terminal
+CTRL-SHIFT t
+DELAY 1000
+REM Ejecutar kuhibot.py
+STRING python kuhibot.py
+ENTER

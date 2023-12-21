@@ -1,0 +1,7 @@
+REM Abrir terminal
+DELAY 1000
+CTRL-ALT t
+REM Ejecutar update
+DELAY 1000
+STRING sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y && sudo apt-get clean -y && sudo apt-get install -f -y
+ENTER

