@@ -1,6 +1,5 @@
 # Ensure the webhook URL is provided
 if (-not $dc) {
-    $dc = "https://discord.com/api/webhooks/1187422803079729232/6u0WSGzMOx7x7A_Gc5oe1-hTrfxoE3ppLNl8i2Uu4P8v5W6Diex-FivGOi9GvUmGgRDz"
     Write-Error "Webhook URL was not provided"
     exit
 }
