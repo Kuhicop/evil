@@ -5,6 +5,7 @@ param (
 # Ensure the webhook URL is provided
 if (-not $dc) {
     Write-Error "Webhook URL was not provided"
+    Read-Host -Prompt "Press Enter to exit"
     exit
 }
 
