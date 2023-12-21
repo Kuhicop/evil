@@ -39,3 +39,7 @@ try {
 } catch {
     Write-Error "An error occurred during script execution"
 }
+
+# Pause at the end of the script
+Write-Output "Webhook URL: $dc"
+Read-Host -Prompt "Press Enter to exit"
