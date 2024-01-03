@@ -1,18 +1,7 @@
 REM Abrir terminal
 DELAY 1000
 CTRL-ALT t
-REM Ejecutar AlertaLLuvia.py
-DELAY 1000
-STRING cd AlertaLluvia
-ENTER
-STRING python AlertaLluvia.py
-ENTER
-REM Abrir pestaña nueva en la terminal
-CTRL-SHIFT t
-DELAY 1000
-REM Subir de carpeta
-STRING cd ..
-ENTER
+DELAY 2000
 REM Navegar a la carpeta discord-bot
 STRING cd discord-bot
 ENTER
@@ -28,12 +17,17 @@ ENTER
 REM Abrir pestaña en terminal
 CTRL-SHIFT t
 DELAY 1000
-REM Ejecutar subastas.py
-STRING python subastas.py
+REM Ejecutar kuhibot.py
+STRING python kuhibot.py
 ENTER
 REM Abrir pestaña en terminal
 CTRL-SHIFT t
 DELAY 1000
-REM Ejecutar kuhibot.py
-STRING python kuhibot.py
+REM Subir de carpeta
+STRING cd ..
+ENTER
+REM Ejecutar Mrnice main.py
+STRING cd Mrnice
+ENTER
+STRING python main.py
 ENTER
